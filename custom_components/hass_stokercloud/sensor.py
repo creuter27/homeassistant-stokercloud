@@ -2,22 +2,15 @@
 from __future__ import annotations
 
 from homeassistant.components.binary_sensor import (
-    BinarySensorDeviceClass,
     BinarySensorEntity,
-    BinarySensorEntityDescription,
 )
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorStateClass
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
-
 
 from stokercloud.controller_data import PowerState, Unit, Value
 from stokercloud.client import Client as StokerCloudClient
 
-
 import datetime
-from homeassistant.const import CONF_USERNAME, POWER_KILO_WATT, TEMP_CELSIUS, MASS_KILOGRAMS
+from homeassistant.const import CONF_USERNAME, POWER_KILO_WATT, TEMP_CELSIUS, MASS_KILOGRAMS, LENGTH_CENTIMETERS
 from .const import DOMAIN
 from .mixins import StokerCloudControllerMixin
 
@@ -27,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 MIN_TIME_BETWEEN_UPDATES = datetime.timedelta(minutes=1)
 
+
 async def async_setup_entry(hass, config, async_add_entities):
     """Set up the sensor platform."""
     client = hass.data[DOMAIN][config.entry_id]
@@ -34,18 +28,19 @@ async def async_setup_entry(hass, config, async_add_entities):
     async_add_entities([
         StokerCloudControllerBinarySensor(client, serial, 'Running', 'running', 'power'),
         StokerCloudControllerBinarySensor(client, serial, 'Alarm', 'alarm', 'problem'),
-        StokerCloudControllerSensor(client, serial, 'Boiler Temperature', 'boiler_temperature_current', SensorDeviceClass.TEMPERATURE),
-        StokerCloudControllerSensor(client, serial, 'Boiler Temperature Requested', 'boiler_temperature_requested', SensorDeviceClass.TEMPERATURE),
-        StokerCloudControllerSensor(client, serial, 'Boiler Return Temperature', 'boiler_return_temperature', SensorDeviceClass.TEMPERATURE),
+        StokerCloudControllerSensor(client, serial, 'Boiler Temperature', 'boiler_temperature_current',
+                                    SensorDeviceClass.TEMPERATURE),
+        StokerCloudControllerSensor(client, serial, 'Boiler Temperature Requested', 'boiler_temperature_requested',
+                                    SensorDeviceClass.TEMPERATURE),
+        StokerCloudControllerSensor(client, serial, 'Boiler Return Temperature', 'boiler_return_temperature',
+                                    SensorDeviceClass.TEMPERATURE),
         StokerCloudControllerSensor(client, serial, 'Boiler Effect', 'boiler_kwh', SensorDeviceClass.POWER),
-        StokerCloudControllerSensor(client, serial, 'Total Consumption', 'consumption_total', state_class=SensorStateClass.TOTAL_INCREASING), # state class STATE_CLASS_TOTAL_INCREASING
+        StokerCloudControllerSensor(client, serial, 'Total Consumption', 'consumption_total',
+                                    state_class=SensorStateClass.TOTAL_INCREASING),
         StokerCloudControllerSensor(client, serial, 'Daily Consumption', 'consumption_day', SensorDeviceClass.WEIGHT),
         StokerCloudControllerSensor(client, serial, 'Hopper Capacity', 'hopper_capacity', SensorDeviceClass.DISTANCE),
         StokerCloudControllerSensor(client, serial, 'State', 'state'),
     ])
-
-
-
 
 
 class StokerCloudControllerBinarySensor(StokerCloudControllerMixin, BinarySensorEntity):
@@ -69,7 +64,8 @@ class StokerCloudControllerBinarySensor(StokerCloudControllerMixin, BinarySensor
 class StokerCloudControllerSensor(StokerCloudControllerMixin, SensorEntity):
     """Representation of a Sensor."""
 
-    def __init__(self, client: StokerCloudClient, serial, name: str, client_key: str, device_class=None, state_class=None):
+    def __init__(self, client: StokerCloudClient, serial, name: str, client_key: str, device_class=None,
+                 state_class=None):
         """Initialize the sensor."""
         super(StokerCloudControllerSensor, self).__init__(client, serial, name, client_key)
         self._device_class = device_class
@@ -94,4 +90,5 @@ class StokerCloudControllerSensor(StokerCloudControllerMixin, SensorEntity):
                 Unit.KWH: POWER_KILO_WATT,
                 Unit.DEGREE: TEMP_CELSIUS,
                 Unit.KILO_GRAM: MASS_KILOGRAMS,
+                Unit.CM: LENGTH_CENTIMETERS,
             }.get(self._state.unit)
