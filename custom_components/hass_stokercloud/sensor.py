@@ -38,10 +38,13 @@ async def async_setup_entry(hass, config, async_add_entities):
         StokerCloudControllerSensor(client, serial, 'Boiler Temperature Requested', 'boiler_temperature_requested', SensorDeviceClass.TEMPERATURE),
         StokerCloudControllerSensor(client, serial, 'Boiler Effect', 'boiler_kwh', SensorDeviceClass.POWER),
         StokerCloudControllerSensor(client, serial, 'Total Consumption', 'consumption_total', state_class=SensorStateClass.TOTAL_INCREASING), # state class STATE_CLASS_TOTAL_INCREASING
+        StokerCloudControllerSensor(client, serial, 'Daily Consumption', 'consumption_day', SensorDeviceClass.WEIGHT),
         StokerCloudControllerSensor(client, serial, 'State', 'state'),
         StokerCloudControllerSensor(client, serial, 'boiler Photo sensor ', 'boiler_photosensor'),
         StokerCloudControllerSensor(client, serial, 'Output Percentage', 'output_percentage'),
-        StokerCloudControllerSensor(client, serial, 'Hopper Distance', 'hopper_distance'),
+        StokerCloudControllerSensor(client, serial, 'Hopper Distance', 'hopper_distance', SensorDeviceClass.DISTANCE),
+        StokerCloudControllerSensor(client, serial, 'Hopper Capacity', 'hopper_capacity', SensorDeviceClass.DISTANCE),
+
     ])
 
 
@@ -104,4 +107,5 @@ class StokerCloudControllerSensor(StokerCloudControllerMixin, SensorEntity):
                 Unit.KWH: POWER_KILO_WATT,
                 Unit.DEGREE: TEMP_CELSIUS,
                 Unit.KILO_GRAM: MASS_KILOGRAMS,
+                Unit.CM: LENGTH_CENTIMETERS,
             }.get(self._state.unit)
