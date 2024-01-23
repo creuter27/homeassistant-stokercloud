@@ -42,15 +42,7 @@ async def async_setup_entry(hass, config, async_add_entities):
         StokerCloudControllerSensor(client, serial, 'Hot Water Temperature Requested', 'hotwater_temperature_requested',
                                     SensorDeviceClass.TEMPERATURE),
         StokerCloudControllerSensor(client, serial, 'Outside Temperature', 'outside_temp',
-                                    SensorDeviceClass.TEMPERATURE),
-        StokerCloudControllerSensor(client, serial, 'O2 Percent', 'o2_percent',
-                                    SensorDeviceClass.PERCENT),
-        StokerCloudControllerSensor(client, serial, 'Online Time Percent', 'time_online_percent',
-                                    SensorDeviceClass.PERCENT),
-        StokerCloudControllerSensor(client, serial, 'Wind Speed', 'wind_speed', SensorDeviceClass.WIND_SPEED),
-        StokerCloudControllerSensor(client, serial, 'Wind Direction', 'wind_direction'),
-        StokerCloudControllerSensor(client, serial, 'Humidity', 'humidity',
-                                    SensorDeviceClass.HUMIDITY)
+                                    SensorDeviceClass.TEMPERATURE)
     ])
 
 
