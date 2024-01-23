@@ -48,8 +48,6 @@ async def async_setup_entry(hass, config, async_add_entities):
         StokerCloudControllerSensor(client, serial, 'Humidity', 'humidity',
                                     SensorDeviceClass.HUMIDITY),
 
-        StokerCloudControllerSensor(client, serial, 'Photosensor Percent', 'boiler_photosensor',
-                                    SensorDeviceClass.PERCENT),      
         StokerCloudControllerSensor(client, serial, 'Total Consumption', 'consumption_total',
                                     state_class=SensorStateClass.TOTAL_INCREASING),
         StokerCloudControllerSensor(client, serial, 'Daily Consumption', 'consumption_day', SensorDeviceClass.WEIGHT)
