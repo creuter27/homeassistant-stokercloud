@@ -1,6 +1,6 @@
 {
   "domain": "hass_stokercloud",
-  "name": "NBE Stoker Cloud",
+  "name": "NBE Pellet Heating",
   "version": "0.9.0",
   "documentation": "https://github.com/creuter27/homeassistant-stokercloud",
   "issue_tracker": "https://github.com/creuter27/homeassistant-stokercloud/issues",
