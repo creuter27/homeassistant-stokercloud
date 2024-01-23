@@ -8,5 +8,6 @@
   "dependencies": ["http"],
   "codeowners": ["creuter27"],
   "requirements": ["git+https://github.com/creuter27/stokercloud-client.git#stokercloud==0.0.30"],
+  "loggers": ["custom_components.hass_stokercloud"],
   "iot_class": "cloud_polling"
 }
