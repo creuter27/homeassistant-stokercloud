@@ -14,6 +14,9 @@ You can install the plugin via HACS using the following steps
 
 # Adding the integration
 
-When you add the integration, an empty field will appear. You need to enter your Stoker Cloud username.
+Go to Settings => Devices & Services and click the "Add Integration" button in the lower left corner
+Search for "NBE", select, and add the integration "NBE Pellet Heating".
 
-Currently the integration is read-only so you do not need to enter your password
+After adding the integration, an empty edit field will appear. Enter your Stoker Cloud username into this field.
+
+Currently, the integration is read-only so you do not need to enter your password
