@@ -53,19 +53,12 @@ async def async_setup_entry(hass, config, async_add_entities):
         StokerCloudControllerSensor(client, serial, 'Photosensor Percent', 'boiler_photosensor',
                                     SensorDeviceClass.PERCENT),      
         StokerCloudControllerSensor(client, serial, 'Boiler Power', 'boiler_power', SensorDeviceClass.POWER),
-        StokerCloudControllerSensor(client, serial, 'Boiler Power 10 Percent', 'power_10_percent', SensorDeviceClass.POWER),
-        StokerCloudControllerSensor(client, serial, 'Boiler Power 100 Percent', 'power_100_percent', SensorDeviceClass.POWER),
         StokerCloudControllerSensor(client, serial, 'Total Consumption', 'consumption_total',
                                     state_class=SensorStateClass.TOTAL_INCREASING),
         StokerCloudControllerSensor(client, serial, 'Daily Consumption', 'consumption_day', SensorDeviceClass.WEIGHT),
         StokerCloudControllerSensor(client, serial, 'Hopper Capacity', 'hopper_capacity', SensorDeviceClass.DISTANCE),
         StokerCloudControllerSensor(client, serial, 'Hopper Max Distance', 'hopper_max_distance', SensorDeviceClass.DISTANCE),
-        StokerCloudControllerSensor(client, serial, 'Hopper Content', 'hopper_content', SensorDeviceClass.WEIGHT),
-        StokerCloudControllerSensor(client, serial, 'Auger Mass per Load', 'auger_mass_per_load', SensorDeviceClass.WEIGHT),
-        StokerCloudControllerSensor(client, serial, 'Exhaust Fan', 'exhaustfan'),
-        StokerCloudControllerSensor(client, serial, 'Ash Auger', 'ashauger'),
-        StokerCloudControllerSensor(client, serial, 'Compressor Power', 'compressor_percent',
-                                    SensorDeviceClass.PERCENT)
+        StokerCloudControllerSensor(client, serial, 'Hopper Content', 'hopper_content', SensorDeviceClass.WEIGHT)
     ])
 
 
